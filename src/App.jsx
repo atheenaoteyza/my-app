@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
 import AllRoutes from "./routes/AllRoutes.jsx";
+import { Header, Footer } from "./components/index.jsx";
 
 const App = () => {
   return (
     <div>
-      <AllRoutes></AllRoutes>
+      <Header />
+      <AllRoutes />
+      <Footer />
     </div>
   );
 };
