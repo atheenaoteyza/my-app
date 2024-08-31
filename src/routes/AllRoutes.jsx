@@ -11,7 +11,7 @@ import {
 } from "../pages";
 const AllRoutes = () => {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Cart" element={<CartPage />} />
@@ -23,7 +23,7 @@ const AllRoutes = () => {
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </div>
+    </>
   );
 };
 

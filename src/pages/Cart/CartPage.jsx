@@ -1,7 +1,10 @@
+import { CartList } from "./components/CartList.jsx";
 export const CartPage = () => {
   return (
     <>
-      <p>Cart</p>
+      <main>
+        <CartList></CartList>
+      </main>
     </>
   );
 };
