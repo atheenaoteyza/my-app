@@ -9,7 +9,7 @@ export const Hero = () => {
         </h1>
         <p className="text-2xl my-7 px-1 dark:text-slate-300">
           The world’s first and largest digital marketplace for cats
-          collectibles and non-fungible tokens (NFTs). Buy, sell, and discover
+          collectibles and non-fungible tokens (NFTs). Buy and discover
           exclusive digital items
         </p>
         <Link

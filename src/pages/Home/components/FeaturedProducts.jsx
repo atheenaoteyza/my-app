@@ -19,7 +19,7 @@ export const FeaturedProduct = () => {
       </h1>
       <div className="flex flex-wrap justify-center lg:flex-row">
         {products.map((product) => (
-          <ProductCard></ProductCard>
+          <ProductCard product={product}></ProductCard>
         ))}
       </div>
     </section>
