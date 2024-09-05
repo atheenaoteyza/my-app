@@ -4,7 +4,7 @@ export const ProductCard = ({ product }) => {
 
   return (
     <div className="m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-      <Link to="/" className="relative">
+      <Link to={`/Products/${id}`} className="relative">
         <span className="absolute top-4 left-2 px-2 bg-orange-500 bg-opacity-90 text-white rounded">
           Best Seller
         </span>
