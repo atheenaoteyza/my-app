@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const ProductDetail = () => {
   const [product, setProduct] = useState(null); // Use null for initial state
-  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchProduct() {
-      const response = await fetch("http://localhost:3000/products/10001");
+      const response = await fetch(`http://localhost:3000/products/${id}`);
       const data = await response.json();
       setProduct(data);
     }
@@ -35,7 +37,7 @@ export const ProductDetail = () => {
             </div>
             <div>
               <h1 className="text-4xl font-bold py-2">
-                {product.name || "Product Title"}
+                {product.name || "Product Name"}
               </h1>
               <h2 className="text-xl">
                 Owned by{" "}
@@ -57,9 +59,9 @@ export const ProductDetail = () => {
                 <p className="dark:text-gray-400">Best Offer</p>
                 <p className="dark:text-gray-400">
                   <span className="text-2xl font-bold dark:text-gray-200">
-                    0.025 WETH{" "}
+                    {`${product.price} WETH `}
                   </span>
-                  $467.40
+                  {`$${parseFloat((product.price * 2339.69).toFixed(2))}`}
                 </p>
                 <div className="flex gap-2">
                   <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-1/5">

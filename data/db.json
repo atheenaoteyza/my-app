@@ -11,7 +11,8 @@
       "rating": 5,
       "in_stock": true,
       "size": 5,
-      "best_seller": true
+      "best_seller": true,
+      "owner": "Atheena Oteyza"
     },
     {
       "id": 10002,
