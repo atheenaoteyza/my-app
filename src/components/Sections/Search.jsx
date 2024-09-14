@@ -1,22 +1,12 @@
 import { useState } from "react";
 
-export const Search = ({ setSearch }) => {
-  const [search, setSearch] = useState("");
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setLocalSearch(value);
-    setSearch(value);
-  };
-
+export const Search = () => {
   return (
     <div className="mx-auto max-w-screen-xl p-2 my-5">
       <form className="flex items-center">
         <div className="relative w-full">
           <span className="bi bi-search flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"></span>
           <input
-            value={localSearch}
-            onChange={handleChange}
             name="search"
             type="text"
             id="simple-search"
