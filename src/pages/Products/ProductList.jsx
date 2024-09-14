@@ -1,14 +1,18 @@
 import { ProductCard } from "../../components";
 import { useState, useEffect } from "react";
 import { FilterBar } from "./components/FilterBar";
+import { Search } from "../../components/Sections/Search";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [filterBar, setFilterBar] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch("http://localhost:3000/products");
+      const response = await fetch(
+        "http://localhost:3000/products?name_like=react"
+      );
       const data = await response.json();
       setProducts(data);
     }

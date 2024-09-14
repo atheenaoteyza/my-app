@@ -3,11 +3,11 @@ import { Header, Footer } from "./components/index.jsx";
 
 const App = () => {
   return (
-    <div>
+    <main>
       <Header />
       <AllRoutes />
       <Footer />
-    </div>
+    </main>
   );
 };
 
