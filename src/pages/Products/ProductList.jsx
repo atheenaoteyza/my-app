@@ -12,7 +12,7 @@ export const ProductList = () => {
   useEffect(() => {
     async function fetchProducts() {
       const response = await fetch(
-        "http://localhost:3000/products?name_like=react"
+        "http://localhost:3000/products"
       );
       const data = await response.json();
       setProducts(data);
