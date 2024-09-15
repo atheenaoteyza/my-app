@@ -1,12 +1,13 @@
+// ProductList.jsx
 import { ProductCard } from "../../components";
 import { useState, useEffect } from "react";
 import { FilterBar } from "./components/FilterBar";
-import { Search } from "../../components/Sections/Search";
+import { useSearch } from "../../components/Sections/SearchContext";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [filterBar, setFilterBar] = useState(false);
-  const [search, setSearch] = useState("");
+  const { search } = useSearch(); // Use the context
 
   useEffect(() => {
     async function fetchProducts() {
@@ -19,12 +20,18 @@ export const ProductList = () => {
     fetchProducts();
   }, []);
 
+  const filteredProducts = products.filter((product) =>
+    Object.keys(product).some((key) =>
+      product[key].toString().toLowerCase().includes(search.toLowerCase())
+    )
+  );
+
   return (
     <main>
       <section className="my-5">
         <div className="my-5 flex justify-between">
           <span className="text-2xl font-semibold dark:text-slate-100 mb-5">
-            All Cattos ({products.length})
+            All Cattos ({filteredProducts.length})
           </span>
           <span>
             <button
@@ -48,7 +55,7 @@ export const ProductList = () => {
         </div>
 
         <div className="flex flex-wrap justify-center lg:flex-row">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product}></ProductCard>
           ))}
         </div>

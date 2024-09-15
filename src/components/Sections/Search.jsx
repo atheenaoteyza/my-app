@@ -1,5 +1,20 @@
 import { useState } from "react";
 
+export const searchFilter = ([data]) => {
+  return data.filter((item) => {
+    return Object.keys(item).some((key) =>
+      item[key].toString().toLowerCase().includes(search.toLowerCase())
+    );
+  });
+};
+
+handleSearch = (event) => {
+  const search = event.target.value;
+  setSearch(search);
+  const filteredData = searchFilter([data]);
+  setFilteredData(filteredData);
+};
+
 export const Search = () => {
   return (
     <div className="mx-auto max-w-screen-xl p-2 my-5">
@@ -7,6 +22,7 @@ export const Search = () => {
         <div className="relative w-full">
           <span className="bi bi-search flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"></span>
           <input
+            onChange={() => handleSearch}
             name="search"
             type="text"
             id="simple-search"
