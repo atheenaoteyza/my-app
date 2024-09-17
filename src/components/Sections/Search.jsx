@@ -9,10 +9,7 @@ export const searchFilter = ([data]) => {
 };
 
 handleSearch = (event) => {
-  const search = event.target.value;
-  setSearch(search);
-  const filteredData = searchFilter([data]);
-  setFilteredData(filteredData);
+  setSearch(event.target.value);
 };
 
 export const Search = () => {

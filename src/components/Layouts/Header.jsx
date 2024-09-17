@@ -11,12 +11,13 @@ export const Header = () => {
 
   const [searchSection, setSearchSection] = useState(false);
   const { search, setSearch } = useSearch(); // Use the context
+  const [inputValue, setInputValue] = useState("");
 
   const handleClick = (e) => {
     e.preventDefault();
     setSearchSection(!searchSection);
     navigate(`/products?search=${search}`);
-    console.log(search);
+    console.log({ search });
   };
 
   const navigate = useNavigate();
@@ -66,7 +67,9 @@ export const Header = () => {
             <div className="relative w-full">
               <span className="bi bi-search flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"></span>
               <input
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
                 value={search}
                 name="search"
                 type="text"
