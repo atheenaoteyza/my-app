@@ -1,20 +1,39 @@
-import { createContext, useContext } from "react";
+import { Children, createContext, useContext, useReducer } from "react";
+import { FilterReducer } from "../reducers";
 
 const filterInitialState = {
   productList: [],
-  onlyInStock: false,
-  bestSellerOnly: false,
-  sortBy: null,
-  ratings: null,
+  necklaceOnly: true,
 };
 
 export const FilterContext = createContext(filterInitialState);
 
 export const FilterProvider = ({ children }) => {
-  const value = {
-    productList: [1, 2, 3],
-  };
+  const [state, dispatch] = useReducer(FilterReducer, filterInitialState);
 
+  function initialProductList(products) {
+    dispatch({
+      type: "PRODUCT_LIST",
+      payload: {
+        products: products,
+      },
+    });
+  }
+
+  function necklace(products) {
+    return state.necklaceOnly === true
+      ? products.filter((product) => product.necklace === true)
+      : products;
+  }
+
+  const filteredProductList = necklace(state.productList);
+
+  const value = {
+    state,
+    dispatch,
+    productList: filteredProductList,
+    initialProductList,
+  };
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
   );

@@ -11,8 +11,9 @@
       "rating": 5,
       "in_stock": true,
       "size": 5,
-      "best_seller": true,
-      "owner": "Atheena Oteyza"
+      "necklace": true,
+      "owner": "Atheena Oteyza",
+      "background": "yellow"
     },
     {
       "id": 10002,
@@ -25,7 +26,8 @@
       "rating": 5,
       "in_stock": true,
       "size": 2,
-      "best_seller": false
+      "necklace": true,
+      "background": "green"
     },
     {
       "id": 10003,
@@ -38,7 +40,8 @@
       "rating": 3,
       "in_stock": true,
       "size": 1,
-      "best_seller": false
+      "necklace": false,
+      "background": "purple"
     },
     {
       "id": 10004,
@@ -51,7 +54,8 @@
       "rating": 5,
       "in_stock": true,
       "size": 7,
-      "best_seller": true
+      "necklace": true,
+      "background": "blue"
     },
     {
       "id": 10005,
@@ -64,7 +68,8 @@
       "rating": 3,
       "in_stock": true,
       "size": 3,
-      "best_seller": false
+      "necklace": true,
+      "background": "yellow"
     },
     {
       "id": 10006,
@@ -77,7 +82,8 @@
       "rating": 5,
       "in_stock": true,
       "size": 10,
-      "best_seller": false
+      "necklace": false,
+      "background": "blue"
     },
     {
       "id": 10007,
@@ -90,7 +96,8 @@
       "rating": 5,
       "in_stock": true,
       "size": 2,
-      "best_seller": false
+      "necklace": false,
+      "background": "purple"
     },
     {
       "id": 10008,
@@ -103,7 +110,8 @@
       "rating": 5,
       "in_stock": true,
       "size": 3,
-      "best_seller": true
+      "necklace": false,
+      "background": "pink"
     },
     {
       "id": 10009,
@@ -116,7 +124,8 @@
       "rating": 5,
       "in_stock": true,
       "size": 3,
-      "best_seller": false
+      "necklace": false,
+      "background": "blue"
     },
     {
       "id": 10010,
@@ -129,7 +138,8 @@
       "rating": 4,
       "in_stock": true,
       "size": 1,
-      "best_seller": false
+      "necklace": true,
+      "background": "yellow"
     },
     {
       "id": 10011,
@@ -142,7 +152,8 @@
       "rating": 5,
       "in_stock": true,
       "size": 3,
-      "best_seller": true
+      "necklace": true,
+      "background": "white"
     },
     {
       "id": 10012,
@@ -155,7 +166,8 @@
       "rating": 5,
       "in_stock": true,
       "size": 1,
-      "best_seller": false
+      "necklace": false,
+      "background": "green"
     },
     {
       "id": 10013,
@@ -168,7 +180,8 @@
       "rating": 4,
       "in_stock": false,
       "size": 3,
-      "best_seller": false
+      "necklace": true,
+      "background": "blue"
     },
     {
       "id": 10014,
@@ -181,7 +194,8 @@
       "rating": 4,
       "in_stock": false,
       "size": 3,
-      "best_seller": false
+      "necklace": false,
+      "background": "blue"
     },
     {
       "id": 10015,
@@ -194,7 +208,8 @@
       "rating": 2,
       "in_stock": false,
       "size": 1,
-      "best_seller": false
+      "necklace": false,
+      "background": "purple"
     }
   ],
   "featured_products": [
@@ -209,7 +224,7 @@
       "rating": 4,
       "in_stock": false,
       "size": 3,
-      "best_seller": false
+      "necklace": false
     },
     {
       "id": 10010,
@@ -222,7 +237,7 @@
       "rating": 4,
       "in_stock": true,
       "size": 1,
-      "best_seller": false
+      "necklace": false
     },
     {
       "id": 10015,
@@ -235,7 +250,7 @@
       "rating": 2,
       "in_stock": false,
       "size": 1,
-      "best_seller": false
+      "necklace": false
     }
   ],
   "orders": [
@@ -252,7 +267,7 @@
           "rating": 5,
           "in_stock": true,
           "size": 5,
-          "best_seller": true
+          "necklace": true
         },
         {
           "id": 10008,
@@ -265,7 +280,7 @@
           "rating": 5,
           "in_stock": true,
           "size": 3,
-          "best_seller": true
+          "necklace": true
         }
       ],
       "amount_paid": 58,

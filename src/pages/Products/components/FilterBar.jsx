@@ -1,3 +1,5 @@
+import { useFilter } from "../../../context";
+
 export const FilterBar = ({ setFilterBar }) => {
   return (
     <section className="filter">
@@ -45,7 +47,7 @@ export const FilterBar = ({ setFilterBar }) => {
               <div className="flex items-center my-1">
                 <input
                   id="price-sort-1"
-                  type="radio"
+                  type="checkbox"
                   value=""
                   name="price-sort"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
@@ -60,7 +62,7 @@ export const FilterBar = ({ setFilterBar }) => {
               <div className="flex items-center my-1">
                 <input
                   id="price-sort-2"
-                  type="radio"
+                  type="checkbox"
                   value=""
                   name="price-sort"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
@@ -74,65 +76,95 @@ export const FilterBar = ({ setFilterBar }) => {
               </div>
             </li>
             <li className="mt-1 mb-5">
-              <span className="font-semibold">Rating</span>
+              <span className="font-semibold">Traits - (By background)</span>
               <div className="flex items-center my-1">
                 <input
-                  id="rating-sort-1"
-                  type="radio"
+                  id="background-sort-1"
+                  type="checkbox"
                   value=""
-                  name="rating-sort"
+                  name="background-sort"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label
-                  htmlFor="rating-sort-1"
+                  htmlFor="background-sort-1"
                   className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  4 Stars & Above
+                  Blue
                 </label>
               </div>
               <div className="flex items-center my-1">
                 <input
-                  id="rating-sort-2"
-                  type="radio"
+                  id="background-sort-2"
+                  type="checkbox"
                   value=""
-                  name="rating-sort"
+                  name="background-sort"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label
-                  htmlFor="rating-sort-2"
+                  htmlFor="background-sort-2"
                   className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  3 Stars & Above
+                  Yellow
                 </label>
               </div>
               <div className="flex items-center my-1">
                 <input
-                  id="rating-sort-3"
-                  type="radio"
+                  id="background-sort-3"
+                  type="checkbox"
                   value=""
-                  name="rating-sort"
+                  name="background-sort"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label
-                  htmlFor="rating-sort-3"
+                  htmlFor="background-sort-3"
                   className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  2 Stars & Above
+                  Purple
                 </label>
               </div>
               <div className="flex items-center my-1">
                 <input
-                  id="rating-sort-4"
-                  type="radio"
+                  id="background-sort-4"
+                  type="checkbox"
                   value=""
-                  name="rating-sort"
+                  name="background-sort"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label
-                  htmlFor="rating-sort-4"
+                  htmlFor="background-sort-4"
                   className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  1 Stars & Above
+                  Green
+                </label>
+              </div>
+              <div className="flex items-center my-1">
+                <input
+                  id="background-sort-5"
+                  type="checkbox"
+                  value=""
+                  name="background-sort"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  htmlFor="background-sort-5"
+                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Pink
+                </label>
+              </div>
+              <div className="flex items-center my-1">
+                <input
+                  id="background-sort-6"
+                  type="checkbox"
+                  value=""
+                  name="background-sort"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  htmlFor="background-sort-6"
+                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >
+                  White
                 </label>
               </div>
             </li>
@@ -149,7 +181,7 @@ export const FilterBar = ({ setFilterBar }) => {
                   htmlFor="best-seller"
                   className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  Best Seller Only
+                  Necklace
                 </label>
               </div>
               <div className="flex items-center my-1">
@@ -163,7 +195,7 @@ export const FilterBar = ({ setFilterBar }) => {
                   htmlFor="only-instock"
                   className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  INSTOCK Only
+                  Hat
                 </label>
               </div>
             </li>

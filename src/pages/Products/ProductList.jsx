@@ -3,9 +3,11 @@ import { ProductCard } from "../../components";
 import { useState, useEffect } from "react";
 import { FilterBar } from "./components/FilterBar";
 import { useSearch } from "../../components/Sections/SearchContext";
+import { useFilter } from "../../context";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const { productList, initialProductList } = useFilter();
   const [filterBar, setFilterBar] = useState(false);
   const { search } = useSearch(); // Use the context
 
@@ -13,12 +15,12 @@ export const ProductList = () => {
     async function fetchProducts() {
       const response = await fetch("http://localhost:3000/products");
       const data = await response.json();
-      setProducts(data);
+      initialProductList(data);
     }
     fetchProducts();
   }, []);
 
-  const filteredProducts = products.filter((product) =>
+  const filteredProducts = productList.filter((product) =>
     Object.keys(product).some((key) =>
       product[key].toString().toLowerCase().includes(search.toLowerCase())
     )
