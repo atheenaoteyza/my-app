@@ -3,7 +3,10 @@ import { FilterReducer } from "../reducers";
 
 const filterInitialState = {
   productList: [],
-  necklaceOnly: true,
+  sortBy: null,
+  backgroundArray: [],
+  necklaceOnly: false,
+  HatOnly: false,
 };
 
 export const FilterContext = createContext(filterInitialState);
@@ -21,12 +24,35 @@ export const FilterProvider = ({ children }) => {
   }
 
   function necklace(products) {
-    return state.necklaceOnly === true
+    return state.necklaceOnly
       ? products.filter((product) => product.necklace === true)
       : products;
   }
 
-  const filteredProductList = necklace(state.productList);
+  function sort(products) {
+    if (state.sortBy === "lowToHigh") {
+      products.sort((a, b) => Number(a.price) - Number(b.price));
+    }
+    if (state.sortBy === "highToLow") {
+      products.sort((a, b) => Number(b.price) - Number(a.price));
+    }
+    return products;
+  }
+
+  function filterWithColor(products) {
+    if (state.backgroundArray.length > 0) {
+      return products.filter((product) =>
+        state.backgroundArray
+          .map((color) => color.toLowerCase())
+          .includes(product.background.toLowerCase())
+      );
+    }
+    return products;
+  }
+
+  const filteredProductList = filterWithColor(
+    sort(necklace(state.productList))
+  );
 
   const value = {
     state,

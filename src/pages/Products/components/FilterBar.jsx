@@ -1,6 +1,22 @@
 import { useFilter } from "../../../context";
 
 export const FilterBar = ({ setFilterBar }) => {
+  const { state, dispatch } = useFilter();
+
+  const handleBackgroundChange = (color) => {
+    const includesColor = state.backgroundArray.includes(color);
+    const newBackgroundArray = includesColor
+      ? state.backgroundArray.filter((c) => c !== color) // Remove color
+      : [...state.backgroundArray, color]; // Add color
+
+    dispatch({
+      type: "UPDATE_BACKGROUND",
+      payload: {
+        backgroundArray: newBackgroundArray,
+      },
+    });
+  };
+
   return (
     <section className="filter">
       <div
@@ -46,10 +62,19 @@ export const FilterBar = ({ setFilterBar }) => {
               <p className="font-semibold my-1">Sort by</p>
               <div className="flex items-center my-1">
                 <input
+                  onChange={() =>
+                    dispatch({
+                      type: "SORT_BY",
+                      payload: {
+                        sortBy: "lowToHigh",
+                      },
+                    })
+                  }
                   id="price-sort-1"
-                  type="checkbox"
+                  type="radio"
                   value=""
                   name="price-sort"
+                  checked={state.sortBy === "lowToHigh"}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label
@@ -61,8 +86,17 @@ export const FilterBar = ({ setFilterBar }) => {
               </div>
               <div className="flex items-center my-1">
                 <input
+                  onChange={() =>
+                    dispatch({
+                      type: "SORT_BY",
+                      payload: {
+                        sortBy: "highToLow",
+                      },
+                    })
+                  }
+                  checked={state.sortBy === "highToLow"}
                   id="price-sort-2"
-                  type="checkbox"
+                  type="radio"
                   value=""
                   name="price-sort"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
@@ -77,101 +111,39 @@ export const FilterBar = ({ setFilterBar }) => {
             </li>
             <li className="mt-1 mb-5">
               <span className="font-semibold">Traits - (By background)</span>
-              <div className="flex items-center my-1">
-                <input
-                  id="background-sort-1"
-                  type="checkbox"
-                  value=""
-                  name="background-sort"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="background-sort-1"
-                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Blue
-                </label>
-              </div>
-              <div className="flex items-center my-1">
-                <input
-                  id="background-sort-2"
-                  type="checkbox"
-                  value=""
-                  name="background-sort"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="background-sort-2"
-                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Yellow
-                </label>
-              </div>
-              <div className="flex items-center my-1">
-                <input
-                  id="background-sort-3"
-                  type="checkbox"
-                  value=""
-                  name="background-sort"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="background-sort-3"
-                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Purple
-                </label>
-              </div>
-              <div className="flex items-center my-1">
-                <input
-                  id="background-sort-4"
-                  type="checkbox"
-                  value=""
-                  name="background-sort"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="background-sort-4"
-                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Green
-                </label>
-              </div>
-              <div className="flex items-center my-1">
-                <input
-                  id="background-sort-5"
-                  type="checkbox"
-                  value=""
-                  name="background-sort"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="background-sort-5"
-                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Pink
-                </label>
-              </div>
-              <div className="flex items-center my-1">
-                <input
-                  id="background-sort-6"
-                  type="checkbox"
-                  value=""
-                  name="background-sort"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="background-sort-6"
-                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  White
-                </label>
-              </div>
+              {["Blue", "Yellow", "Purple", "Green", "Pink", "White"].map(
+                (color) => (
+                  <div className="flex items-center my-1" key={color}>
+                    <input
+                      id={`background-sort-${color.toLowerCase()}`}
+                      type="checkbox"
+                      value={color}
+                      onChange={() => handleBackgroundChange(color)}
+                      checked={state.backgroundArray.includes(color)}
+                      name="background-sort"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                      htmlFor={`background-sort-${color.toLowerCase()}`}
+                      className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >
+                      {color}
+                    </label>
+                  </div>
+                )
+              )}
             </li>
             <li className="mt-1 mb-5">
               <span className="font-semibold">Other Filters</span>
               <div className="flex items-center my-1">
                 <input
+                  onChange={() =>
+                    dispatch({
+                      type: "NECKLACE_ONLY",
+                      payload: { necklaceOnly: !state.necklaceOnly },
+                    })
+                  }
+                  checked={state.necklaceOnly} // Bind checked state to necklaceOnly
                   id="best-seller"
                   type="checkbox"
                   value=""
