@@ -158,6 +158,13 @@ export const FilterBar = ({ setFilterBar }) => {
               </div>
               <div className="flex items-center my-1">
                 <input
+                  onChange={() =>
+                    dispatch({
+                      type: "HAT_ONLY",
+                      payload: { hatOnly: !state.hatOnly },
+                    })
+                  }
+                  checked={state.hatOnly} // Bind checked state to necklaceOnly
                   id="only-instock"
                   type="checkbox"
                   value=""
@@ -173,6 +180,11 @@ export const FilterBar = ({ setFilterBar }) => {
             </li>
             <li className="mt-1 mb-5 px-1">
               <button
+                onClick={() => {
+                  dispatch({
+                    type: "CLEAR_FILTER",
+                  });
+                }}
                 type="button"
                 className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
               >

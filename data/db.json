@@ -12,6 +12,7 @@
       "in_stock": true,
       "size": 5,
       "necklace": true,
+      "hat": true,
       "owner": "Atheena Oteyza",
       "background": "yellow"
     },
@@ -27,6 +28,7 @@
       "in_stock": true,
       "size": 2,
       "necklace": true,
+      "hat": false,
       "background": "green"
     },
     {
@@ -41,6 +43,8 @@
       "in_stock": true,
       "size": 1,
       "necklace": false,
+      "hat": false,
+
       "background": "purple"
     },
     {
@@ -55,6 +59,7 @@
       "in_stock": true,
       "size": 7,
       "necklace": true,
+      "hat": false,
       "background": "blue"
     },
     {
@@ -69,6 +74,7 @@
       "in_stock": true,
       "size": 3,
       "necklace": true,
+      "hat": false,
       "background": "yellow"
     },
     {
@@ -83,6 +89,7 @@
       "in_stock": true,
       "size": 10,
       "necklace": false,
+      "hat": true,
       "background": "blue"
     },
     {
@@ -97,6 +104,7 @@
       "in_stock": true,
       "size": 2,
       "necklace": false,
+      "hat": false,
       "background": "purple"
     },
     {
@@ -111,6 +119,7 @@
       "in_stock": true,
       "size": 3,
       "necklace": false,
+      "hat": false,
       "background": "pink"
     },
     {
@@ -125,6 +134,7 @@
       "in_stock": true,
       "size": 3,
       "necklace": false,
+      "hat": true,
       "background": "blue"
     },
     {
@@ -139,6 +149,7 @@
       "in_stock": true,
       "size": 1,
       "necklace": true,
+      "hat": false,
       "background": "yellow"
     },
     {
@@ -153,6 +164,7 @@
       "in_stock": true,
       "size": 3,
       "necklace": true,
+      "hat": false,
       "background": "white"
     },
     {
@@ -167,6 +179,7 @@
       "in_stock": true,
       "size": 1,
       "necklace": false,
+      "hat": false,
       "background": "green"
     },
     {
@@ -181,6 +194,7 @@
       "in_stock": false,
       "size": 3,
       "necklace": true,
+      "hat": true,
       "background": "blue"
     },
     {
@@ -195,6 +209,7 @@
       "in_stock": false,
       "size": 3,
       "necklace": false,
+      "hat": true,
       "background": "blue"
     },
     {

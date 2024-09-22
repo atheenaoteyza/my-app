@@ -6,8 +6,7 @@ import { useSearch } from "../../components/Sections/SearchContext";
 import { useFilter } from "../../context";
 
 export const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const { productList, initialProductList } = useFilter();
+  const { products, initialProductList } = useFilter();
   const [filterBar, setFilterBar] = useState(false);
   const { search } = useSearch(); // Use the context
 
@@ -20,7 +19,7 @@ export const ProductList = () => {
     fetchProducts();
   }, []);
 
-  const filteredProducts = productList.filter((product) =>
+  const filteredProducts = products.filter((product) =>
     Object.keys(product).some((key) =>
       product[key].toString().toLowerCase().includes(search.toLowerCase())
     )

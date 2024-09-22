@@ -6,7 +6,7 @@ const filterInitialState = {
   sortBy: null,
   backgroundArray: [],
   necklaceOnly: false,
-  HatOnly: false,
+  hatOnly: false,
 };
 
 export const FilterContext = createContext(filterInitialState);
@@ -26,6 +26,12 @@ export const FilterProvider = ({ children }) => {
   function necklace(products) {
     return state.necklaceOnly
       ? products.filter((product) => product.necklace === true)
+      : products;
+  }
+
+  function hat(products) {
+    return state.hatOnly
+      ? products.filter((product) => product.hat === true)
       : products;
   }
 
@@ -50,14 +56,14 @@ export const FilterProvider = ({ children }) => {
     return products;
   }
 
-  const filteredProductList = filterWithColor(
-    sort(necklace(state.productList))
+  const filteredProductList = hat(
+    filterWithColor(sort(necklace(state.productList)))
   );
 
   const value = {
     state,
     dispatch,
-    productList: filteredProductList,
+    products: filteredProductList,
     initialProductList,
   };
   return (
