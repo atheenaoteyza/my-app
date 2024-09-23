@@ -3,6 +3,7 @@ import Logo from "../../assets/logo.png";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSearch } from "../Sections/SearchContext";
+import { DropdownLoggedOut } from "../Elements/DropdownLoggedOut";
 
 export const Header = () => {
   const [darkMode, setDarkMode] = useState(
@@ -12,6 +13,7 @@ export const Header = () => {
   const [searchSection, setSearchSection] = useState(false);
   const { search, setSearch } = useSearch(); // Use the context
   const [inputValue, setInputValue] = useState("");
+  const [Dropdown, setDropdown] = useState(false);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -57,10 +59,19 @@ export const Header = () => {
                 </span>
               </span>
             </Link>
-            <span className="bi bi-person-circle cursor-pointer text-xl text-gray-700 dark:text-white mr-5"></span>
+
+            <span
+              onClick={() => setDropdown(!Dropdown)}
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              className="bi bi-person-circle cursor-pointer text-xl text-gray-700 dark:text-white mr-5"
+              type="button"
+            ></span>
+            {Dropdown && <DropdownLoggedOut></DropdownLoggedOut>}
           </div>
         </div>
       </nav>
+
       {searchSection && (
         <div className="mx-auto max-w-screen-xl p-2 my-5">
           <form className="flex items-center">
