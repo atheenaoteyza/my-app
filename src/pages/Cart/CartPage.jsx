@@ -4,7 +4,7 @@ export const CartPage = () => {
   return (
     <>
       <main>
-        <CartEmpty />
+        <CartList />
       </main>
     </>
   );
