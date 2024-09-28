@@ -5,17 +5,19 @@ import App from "./App.jsx";
 import "./index.css";
 import { ScrollToTop } from "./components/index.jsx";
 import { SearchProvider } from "./components/Sections/SearchContext.jsx";
-import { FilterProvider } from "./context";
+import { FilterProvider, CartProvider } from "./context";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
-      <FilterProvider>
-        <SearchProvider>
-          <ScrollToTop />
-          <App />
-        </SearchProvider>
-      </FilterProvider>
+      <CartProvider>
+        <FilterProvider>
+          <SearchProvider>
+            <ScrollToTop />
+            <App />
+          </SearchProvider>
+        </FilterProvider>
+      </CartProvider>
     </Router>
   </StrictMode>
 );

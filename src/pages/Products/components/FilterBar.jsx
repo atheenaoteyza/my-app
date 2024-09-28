@@ -164,7 +164,7 @@ export const FilterBar = ({ setFilterBar }) => {
                       payload: { hatOnly: !state.hatOnly },
                     })
                   }
-                  checked={state.hatOnly} // Bind checked state to necklaceOnly
+                  checked={state.hatOnly}
                   id="only-instock"
                   type="checkbox"
                   value=""

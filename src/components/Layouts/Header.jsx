@@ -4,8 +4,10 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSearch } from "../Sections/SearchContext";
 import { DropdownLoggedOut } from "../Elements/DropdownLoggedOut";
+import { useCart } from "../../context";
 
 export const Header = () => {
+  const { newArray } = useCart();
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) || false
   );
@@ -55,7 +57,7 @@ export const Header = () => {
             <Link to="/cart">
               <span className="bi bi-cart-fill cursor-pointer text-xl text-gray-700 dark:text-white mr-5 relative">
                 <span className="text-white text-sm absolute -top-1 left-2.5 bg-rose-500 px-1 rounded-full ">
-                  0
+                  {newArray.length}
                 </span>
               </span>
             </Link>
