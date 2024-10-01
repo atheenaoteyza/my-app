@@ -11,12 +11,16 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CartReducer, initialCartContext);
 
   function addToCart(product) {
-    const updatedList = state.cartArray.concat(product);
     dispatch({
       type: "ADD_TO_CART",
-      payload: {
-        product: updatedList,
-      },
+      payload: product,
+    });
+  }
+
+  function removeToCart(product) {
+    dispatch({
+      type: "REMOVE_TO_CART",
+      payload: product, // Send the product directly
     });
   }
   const newArray = state.cartArray;
@@ -25,6 +29,7 @@ export const CartProvider = ({ children }) => {
     dispatch,
     newArray,
     addToCart,
+    removeToCart,
     initialCartContext,
   };
   return (
