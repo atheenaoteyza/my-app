@@ -3,13 +3,17 @@ import { useState, useEffect } from "react";
 import { useCart } from "../../context";
 export const ProductCard = ({ product }) => {
   const { name, overview, id, image_url, price } = product;
-  const [cart, setCart] = useState(false);
-  const { addToCart, initialCartContext } = useCart();
+  const { addToCart, removeToCart, newArray } = useCart();
 
-  const handleClick = () => {
+  const handleAddToCart = () => {
     addToCart(product);
-    setCart(true);
   };
+
+  const handleRemoveToCart = () => {
+    removeToCart(product);
+  };
+  console.log(newArray);
+  const inCart = newArray.some((item) => item.id === id);
 
   return (
     <div className="m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -43,16 +47,16 @@ export const ProductCard = ({ product }) => {
           <p className="font-normal text-gray-500 dark:text-gray-100">
             Last sale: {price} ETH
           </p>
-          {cart ? (
+          {inCart ? (
             <button
-              onClick={() => setCart(false)}
+              onClick={handleRemoveToCart}
               className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
             >
               Remove to cart
             </button>
           ) : (
             <button
-              onClick={() => handleClick()}
+              onClick={handleAddToCart}
               className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Add to cart

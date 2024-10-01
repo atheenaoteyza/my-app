@@ -3,10 +3,15 @@ export const CartReducer = (state, action) => {
 
   switch (type) {
     case "ADD_TO_CART":
-      return { ...state, cartArray: payload.product };
+      return { ...state, cartArray: [...state.cartArray, action.payload] };
 
     case "REMOVE_TO_CART":
-      return;
+      return {
+        ...state,
+        cartArray: state.cartArray.filter(
+          (item) => item.id !== action.payload.id
+        ),
+      };
 
     case "UPDATE_CART":
       return;
