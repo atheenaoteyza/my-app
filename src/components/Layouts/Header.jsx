@@ -24,6 +24,16 @@ export const Header = () => {
     console.log({ search });
   };
 
+  const location = useLocation();
+
+  useEffect(() => {
+    // Clear the search value when navigating to a different page
+    if (location.pathname !== "/products") {
+      // Adjust this condition as needed
+      setSearch(""); // Clear the search
+    }
+  }, [location, setSearch]); // Dependencies
+
   const navigate = useNavigate();
 
   useEffect(() => {

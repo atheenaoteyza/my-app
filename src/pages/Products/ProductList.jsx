@@ -4,11 +4,14 @@ import { useState, useEffect } from "react";
 import { FilterBar } from "./components/FilterBar";
 import { useSearch } from "../../components/Sections/SearchContext";
 import { useFilter } from "../../context";
+import { useLocation } from "react-router-dom";
 
 export const ProductList = () => {
   const { products, initialProductList } = useFilter();
   const [filterBar, setFilterBar] = useState(false);
   const { search } = useSearch(); // Use the context
+  const location = useLocation();
+  const { dispatch } = useFilter();
 
   useEffect(() => {
     async function fetchProducts() {
@@ -24,6 +27,13 @@ export const ProductList = () => {
       product[key].toString().toLowerCase().includes(search.toLowerCase())
     )
   );
+
+  // Effect to clear filters on location change
+  useEffect(() => {
+    dispatch({
+      type: "CLEAR_FILTER", // Dispatch the action to clear filters
+    });
+  }, [location, dispatch]); // Run this effect when the location changes
 
   return (
     <main>

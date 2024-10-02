@@ -1,10 +1,12 @@
 import { CartCard } from "./CartCard";
 import { Checkout } from "./Checkout";
 import { useState } from "react";
+import { useCart } from "../../../context";
+import { Link } from "react-router-dom";
 
 export const CartList = () => {
   const [checkout, setCheckout] = useState(false);
-  const cartProduct = false;
+  const { newArray } = useCart();
   return (
     <>
       <section className=" antialiased">
@@ -16,7 +18,9 @@ export const CartList = () => {
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                     My Cart
                   </h2>
-                  <CartCard></CartCard>
+                  {newArray.map((product) => (
+                    <CartCard product={product}></CartCard>
+                  ))}
                 </div>
               </div>
             </div>
@@ -29,22 +33,16 @@ export const CartList = () => {
 
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <dl className="flex items-center justify-between gap-4">
-                      <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                        Product 1
-                      </dt>
-                      <dd className="text-base font-medium text-gray-900 dark:text-white">
-                        $799
-                      </dd>
-                    </dl>
-                    <dl className="flex items-center justify-between gap-4">
-                      <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                        Product 2
-                      </dt>
-                      <dd className="text-base font-medium text-gray-900 dark:text-white">
-                        $799
-                      </dd>
-                    </dl>
+                    {newArray.map((product) => (
+                      <dl className="flex items-center justify-between gap-4">
+                        <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
+                          {product.name}
+                        </dt>
+                        <dd className="text-base font-medium text-gray-900 dark:text-white">
+                          {product.price.toFixed(3)} ETH
+                        </dd>
+                      </dl>
+                    ))}
                   </div>
 
                   <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
@@ -52,7 +50,11 @@ export const CartList = () => {
                       Total
                     </dt>
                     <dd className="text-base font-bold text-gray-900 dark:text-white">
-                      $8,191.00
+                      {newArray
+                        .map((product) => product.price)
+                        .reduce((accum, currentV) => accum + currentV, 0)
+                        .toFixed(3)}{" "}
+                      ETH
                     </dd>
                   </dl>
                 </div>
@@ -66,8 +68,8 @@ export const CartList = () => {
 
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-sm font-normal text-gray-500 dark:text-gray-400"></span>
-                  <a
-                    href="#"
+                  <Link
+                    to="/products"
                     title=""
                     className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 underline hover:no-underline dark:text-blue-500"
                   >
@@ -87,7 +89,7 @@ export const CartList = () => {
                         d="M19 12H5m14 0-4 4m4-4-4-4"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

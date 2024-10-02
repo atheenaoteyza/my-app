@@ -1,19 +1,19 @@
-export const CartCard = () => {
+import { useCart } from "../../../context";
+export const CartCard = ({ product }) => {
+  const { name, overview, id, image_url, price } = product;
+  const { removeToCart } = useCart();
+
   return (
     <>
       <div className="border-t border-gray-200 dark:border-gray-700 mt-5 py-5 space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
         <a href="#" className="shrink-0 md:order-1">
-          <img
-            className="h-20 w-20"
-            src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
-            alt="imac image"
-          />
+          <img className="h-20 w-20" src={image_url} alt="imac image" />
         </a>
 
         <div className="flex items-center justify-between md:order-3 md:justify-end">
           <div className="text-end md:order-4 md:w-32">
             <p className="text-base font-bold text-gray-900 dark:text-white">
-              $1,499
+              {`${price} ETH `}
             </p>
           </div>
         </div>
@@ -23,8 +23,7 @@ export const CartCard = () => {
             href="#"
             className="text-base font-medium text-gray-900 hover:underline dark:text-white"
           >
-            PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24"
-            Retina 4.5K, 8GB, SSD 256GB, 10-core GPU, Keyboard layout INT
+            {name}
           </a>
 
           <div className="flex items-center gap-4">
@@ -53,6 +52,7 @@ export const CartCard = () => {
             </button>
 
             <button
+              onClick={() => removeToCart(product)}
               type="button"
               className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
             >
