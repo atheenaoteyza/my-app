@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useCart } from "../../context";
 export const ProductCard = ({ product }) => {
   const { name, overview, id, image_url, price } = product;
+
+  const [cart, setCart] = useState(false);
   const { addToCart, removeToCart, newArray } = useCart();
 
   const handleAddToCart = () => {
