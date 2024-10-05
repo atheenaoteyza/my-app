@@ -44,7 +44,6 @@
       "size": 1,
       "necklace": false,
       "hat": false,
-
       "background": "purple"
     },
     {
@@ -314,6 +313,18 @@
       "password": "$2a$10$K9aEH3/VDb2QU/EsjrHGJO7X5JxCcg0bMAnBtyT3kBW9FL7FnnygO",
       "name": "Shubham Sarda",
       "id": 1
+    },
+    {
+      "email": "sharaha@yahoo.com",
+      "password": "$2a$10$TphHwjuQBFR1lbgszUv4zudu/.nYRQ6FDHBWVxVjMYQX0hHoYYjK.",
+      "name": "Shahara",
+      "id": 2
+    },
+    {
+      "email": "louisetyz@apple.com",
+      "password": "$2a$10$0m9wczTkL70J9yXWCI/a8OYw8rms0eWHk4ogAYCg0F5Rk3sSDoPSu",
+      "name": "Louise Oteyza",
+      "id": 3
     }
   ]
 }
