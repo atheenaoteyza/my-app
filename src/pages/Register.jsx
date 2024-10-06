@@ -1,5 +1,9 @@
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export const Register = () => {
+  const navigate = useNavigate();
   async function handleRegister(event) {
+    //handle the registration of a user through a form submission. It collects user input, validates it, and sends it to a server endpoint for processing.
     event.preventDefault();
 
     const authDetail = {
@@ -7,12 +11,17 @@ export const Register = () => {
       email: event.target.email.value,
       password: event.target.password.value,
     };
-    const response = await fetch("http://localhost:3000/register", {
+    const requestOptions = {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(authDetail),
-    });
+    };
+    const response = await fetch(
+      "http://localhost:3000/register",
+      requestOptions
+    );
     const data = await response.json();
+    data.accessToken ? navigate : toast.error(data);
     console.log(data);
   }
 

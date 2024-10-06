@@ -325,6 +325,18 @@
       "password": "$2a$10$0m9wczTkL70J9yXWCI/a8OYw8rms0eWHk4ogAYCg0F5Rk3sSDoPSu",
       "name": "Louise Oteyza",
       "id": 3
+    },
+    {
+      "email": "louiseotyz@apple.com",
+      "password": "$2a$10$RUPodRJXNezLIkkgUm294O5SK2iDAGtZk8Wnpzq.0H99370oTlBcu",
+      "name": "Louise Oteyza",
+      "id": 4
+    },
+    {
+      "email": "louiseotyz@react.com",
+      "password": "$2a$10$N6pDlyPK35gTqwOg9L/FB.Q97iTEjz0QTi6KWNNaTQQgr0MiQEQYi",
+      "name": "Louise Oteyza",
+      "id": 5
     }
   ]
 }

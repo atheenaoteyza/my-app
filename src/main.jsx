@@ -6,7 +6,8 @@ import "./index.css";
 import { ScrollToTop } from "./components/index.jsx";
 import { SearchProvider } from "./components/Sections/SearchContext.jsx";
 import { FilterProvider, CartProvider } from "./context";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")).render(
         <FilterProvider>
           <SearchProvider>
             <ScrollToTop />
+            <ToastContainer />
             <App />
           </SearchProvider>
         </FilterProvider>
