@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import { useCart } from "../../context";
 
 export const ProductCard = memo(({ product }) => {

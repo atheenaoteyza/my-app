@@ -5,8 +5,6 @@ import { useParams } from "react-router-dom";
 export const ProductDetail = () => {
   const [product, setProduct] = useState(null); // Use null for initial state
   const { id } = useParams();
-  const [loading, setLoading] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -15,11 +13,9 @@ export const ProductDetail = () => {
       setProduct(data);
     }
     fetchProduct();
-  }, []);
+  }, [id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (!product) return <p>No product data available.</p>;
+  if (!product) return <p>Loading...</p>;
 
   return (
     <main>

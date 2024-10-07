@@ -1,6 +1,6 @@
 import { useCart } from "../../../context";
 export const CartCard = ({ product }) => {
-  const { name, overview, id, image_url, price } = product;
+  const { name, image_url, price } = product;
   const { removeToCart } = useCart();
 
   return (

@@ -1,5 +1,7 @@
 // ProductList.jsx
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useMemo } from "react";
+
 import { ProductCard } from "../../components";
 import { FilterBar } from "./components/FilterBar";
 import { useSearch } from "../../components/Sections/SearchContext";

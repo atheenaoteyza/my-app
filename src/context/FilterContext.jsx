@@ -1,4 +1,4 @@
-import { Children, createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { FilterReducer } from "../reducers";
 
 const filterInitialState = {

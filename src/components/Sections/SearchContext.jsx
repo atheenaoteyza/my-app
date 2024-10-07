@@ -1,6 +1,6 @@
-// SearchContext.js
+/* eslint-disable no-unused-vars */
 import React, { createContext, useContext, useState } from "react";
-
+import PropTypes from "prop-types";
 // Create a context with default values
 const SearchContext = createContext();
 
@@ -13,6 +13,10 @@ export const SearchProvider = ({ children }) => {
       {children}
     </SearchContext.Provider>
   );
+};
+
+SearchProvider.propTypes = {
+  children: PropTypes.node.isRequired, // Validate that children are required
 };
 
 // Custom hook to use the search context

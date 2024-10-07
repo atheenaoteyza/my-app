@@ -1,6 +1,6 @@
 // Header.jsx
 import Logo from "../../assets/logo.png";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSearch } from "../Sections/SearchContext";
 import { DropdownLoggedOut } from "../Elements/DropdownLoggedOut";
@@ -14,7 +14,6 @@ export const Header = () => {
 
   const [searchSection, setSearchSection] = useState(false);
   const { search, setSearch } = useSearch(); // Use the context
-  const [inputValue, setInputValue] = useState("");
   const [Dropdown, setDropdown] = useState(false);
 
   const handleClick = (e) => {

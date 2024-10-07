@@ -1,6 +1,6 @@
 import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
-import { DropdownLoggedOut } from "../Elements/DropdownLoggedOut";
+//import { DropdownLoggedOut } from "../Elements/DropdownLoggedOut";
 
 export const Footer = () => {
   return (

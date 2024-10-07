@@ -19,7 +19,7 @@ export const CartList = () => {
                     My Cart
                   </h2>
                   {newArray.map((product) => (
-                    <CartCard product={product}></CartCard>
+                    <CartCard key={product.id} product={product}></CartCard>
                   ))}
                 </div>
               </div>
@@ -34,7 +34,10 @@ export const CartList = () => {
                 <div className="space-y-4">
                   <div className="space-y-2">
                     {newArray.map((product) => (
-                      <dl className="flex items-center justify-between gap-4">
+                      <dl
+                        className="flex items-center justify-between gap-4"
+                        key={product.id}
+                      >
                         <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
                           {product.name}
                         </dt>
