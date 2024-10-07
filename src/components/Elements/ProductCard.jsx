@@ -1,21 +1,20 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useCart } from "../../context";
-export const ProductCard = ({ product }) => {
-  const { name, overview, id, image_url, price } = product;
 
-  const [cart, setCart] = useState(false);
+export const ProductCard = memo(({ product }) => {
+  const { name, id, image_url, price } = product;
   const { addToCart, removeToCart, newArray } = useCart();
 
-  const handleAddToCart = () => {
-    addToCart(product);
-  };
-
-  const handleRemoveToCart = () => {
-    removeToCart(product);
-  };
-  console.log(newArray);
   const inCart = newArray.some((item) => item.id === id);
+
+  const handleCartToggle = () => {
+    if (inCart) {
+      removeToCart(product);
+    } else {
+      addToCart(product);
+    }
+  };
 
   return (
     <div className="m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -23,11 +22,11 @@ export const ProductCard = ({ product }) => {
         <span className="absolute top-4 left-2 px-2 bg-orange-500 bg-opacity-90 text-white rounded">
           Best Seller
         </span>
-
         <img
           className="rounded-t-lg w-full h-74"
           src={image_url}
-          alt="Nft image"
+          alt={`Image of ${name}`}
+          loading="lazy" // Lazy loading for better performance
         />
       </Link>
       <div className="p-5">
@@ -36,36 +35,30 @@ export const ProductCard = ({ product }) => {
             {name}
           </h5>
         </Link>
-
-        <div
-          className="flex items-center mt-2.5 text-xl p-0"
-          style={{ marginBottom: 0 }}
-        >
+        <div className="flex items-center mt-2.5 text-xl">
           <span className="font-bold text-gray-900 dark:text-white">
             {price} ETH
           </span>
         </div>
-        <div className="flex items-center justify-between p-0">
+        <div className="flex items-center justify-between mt-3">
           <p className="font-normal text-gray-500 dark:text-gray-100">
             Last sale: {price} ETH
           </p>
-          {inCart ? (
-            <button
-              onClick={handleRemoveToCart}
-              className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-            >
-              Remove to cart
-            </button>
-          ) : (
-            <button
-              onClick={handleAddToCart}
-              className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Add to cart
-            </button>
-          )}
+          <button
+            onClick={handleCartToggle}
+            className={`text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+              inCart
+                ? "bg-red-700 hover:bg-red-800"
+                : "bg-blue-700 hover:bg-blue-800"
+            } focus:ring-4 focus:outline-none focus:ring-${
+              inCart ? "red" : "blue"
+            }-300`}
+            aria-label={inCart ? "Remove from cart" : "Add to cart"}
+          >
+            {inCart ? "Remove from cart" : "Add to cart"}
+          </button>
         </div>
       </div>
     </div>
   );
-};
+});

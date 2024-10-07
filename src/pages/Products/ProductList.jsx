@@ -1,6 +1,6 @@
 // ProductList.jsx
+import React, { useState, useEffect, useMemo } from "react";
 import { ProductCard } from "../../components";
-import { useState, useEffect } from "react";
 import { FilterBar } from "./components/FilterBar";
 import { useSearch } from "../../components/Sections/SearchContext";
 import { useFilter } from "../../context";
@@ -9,31 +9,42 @@ import { useLocation } from "react-router-dom";
 export const ProductList = () => {
   const { products, initialProductList } = useFilter();
   const [filterBar, setFilterBar] = useState(false);
-  const { search } = useSearch(); // Use the context
+  const { search } = useSearch();
   const location = useLocation();
   const { dispatch } = useFilter();
 
+  // Loading state
+  const [loading, setLoading] = useState(true);
+
+  // Fetch products once on mount
   useEffect(() => {
-    async function fetchProducts() {
-      const response = await fetch("http://localhost:3000/products");
-      const data = await response.json();
-      initialProductList(data);
-    }
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/products");
+        const data = await response.json();
+        initialProductList(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetch attempt
+      }
+    };
     fetchProducts();
-  }, []);
+  }, [initialProductList]);
 
-  const filteredProducts = products.filter((product) =>
-    Object.keys(product).some((key) =>
-      product[key].toString().toLowerCase().includes(search.toLowerCase())
-    )
-  );
+  // Memoized filtering logic
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      Object.keys(product).some((key) =>
+        product[key].toString().toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [products, search]);
 
-  // Effect to clear filters on location change
+  // Clear filters on location change
   useEffect(() => {
-    dispatch({
-      type: "CLEAR_FILTER", // Dispatch the action to clear filters
-    });
-  }, [location, dispatch]); // Run this effect when the location changes
+    dispatch({ type: "CLEAR_FILTER" });
+  }, [location, dispatch]);
 
   return (
     <main>
@@ -45,8 +56,6 @@ export const ProductList = () => {
           <span>
             <button
               onClick={() => setFilterBar(!filterBar)}
-              id="dropdownMenuIconButton"
-              data-dropdown-toggle="dropdownDots"
               className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700"
               type="button"
             >
@@ -63,13 +72,18 @@ export const ProductList = () => {
           </span>
         </div>
 
-        <div className="flex flex-wrap justify-center lg:flex-row">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product}></ProductCard>
-          ))}
-        </div>
+        {/* Show loading indicator while products are being fetched */}
+        {loading ? (
+          <div className="text-center">Loading products...</div>
+        ) : (
+          <div className="flex flex-wrap justify-center lg:flex-row">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </section>
-      {filterBar && <FilterBar setFilterBar={setFilterBar}></FilterBar>}
+      {filterBar && <FilterBar setFilterBar={setFilterBar} />}
     </main>
   );
 };
