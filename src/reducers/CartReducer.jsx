@@ -1,5 +1,5 @@
 export const CartReducer = (state, action) => {
-  const { type, payload } = action;
+  const { type } = action;
 
   switch (type) {
     case "ADD_TO_CART":
