@@ -337,6 +337,24 @@
       "password": "$2a$10$N6pDlyPK35gTqwOg9L/FB.Q97iTEjz0QTi6KWNNaTQQgr0MiQEQYi",
       "name": "Louise Oteyza",
       "id": 5
+    },
+    {
+      "email": "pokemon@gmail.com",
+      "password": "$2a$10$B.SyZvDW4wIGGTKEuUPeiuejsPMAOycn/SCB57CMSEkj.XR9emC.W",
+      "name": "Pokemon",
+      "id": 6
+    },
+    {
+      "email": "pokemon123@gmail.com",
+      "password": "$2a$10$5bFvFlsysUWRsC0Vuq7iPODPerlduVg6tepMG.0Vxl3GNVqW6R5DC",
+      "name": "Pokemon123",
+      "id": 7
+    },
+    {
+      "email": "molly@astronaut.com",
+      "password": "$2a$10$rKPzozVr/7laT8U2EoYc/evr2SOW9d5QP3PPIyG1cHPDOJ2t.b.tO",
+      "name": "Molly Astronaut",
+      "id": 8
     }
   ]
 }

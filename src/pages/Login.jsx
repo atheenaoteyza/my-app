@@ -1,11 +1,17 @@
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 export const Login = () => {
+  const navigate = useNavigate();
+  const emailRef = useRef();
+  const passwordRef = useRef();
   async function handleLogin(event) {
     //handle the registration of a user through a form submission. It collects user input, validates it, and sends it to a server endpoint for processing.
     event.preventDefault();
 
     const authDetail = {
-      email: event.target.email.value,
-      password: event.target.password.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
     };
     const requestOptions = {
       method: "POST",
@@ -15,6 +21,9 @@ export const Login = () => {
     const response = await fetch("http://localhost:3000/login", requestOptions);
     const data = await response.json();
     console.log(data);
+    data.accessToken ? navigate("/products") : toast.error(data);
+    sessionStorage.setItem("token", data.accessToken);
+    sessionStorage.setItem("cbid", data.user.id);
   }
 
   return (
@@ -33,6 +42,7 @@ export const Login = () => {
             Your email
           </label>
           <input
+            ref={emailRef}
             type="email"
             id="email"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
@@ -49,6 +59,7 @@ export const Login = () => {
             Your password
           </label>
           <input
+            ref={passwordRef}
             type="password"
             id="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

@@ -1,15 +1,20 @@
+import { useRef } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 export const Register = () => {
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
   const navigate = useNavigate();
+
   async function handleRegister(event) {
     //handle the registration of a user through a form submission. It collects user input, validates it, and sends it to a server endpoint for processing.
     event.preventDefault();
 
     const authDetail = {
-      name: event.target.name.value,
-      email: event.target.email.value,
-      password: event.target.password.value,
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
     };
     const requestOptions = {
       method: "POST",
@@ -21,7 +26,7 @@ export const Register = () => {
       requestOptions
     );
     const data = await response.json();
-    data.accessToken ? navigate : toast.error(data);
+    data.accessToken ? navigate("/products") : toast.error(data);
     console.log(data);
   }
 
@@ -41,6 +46,7 @@ export const Register = () => {
             Your name
           </label>
           <input
+            ref={nameRef}
             type="name"
             id="name"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
@@ -57,6 +63,7 @@ export const Register = () => {
             Your email
           </label>
           <input
+            ref={emailRef}
             type="email"
             id="email"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
@@ -73,6 +80,7 @@ export const Register = () => {
             Your password
           </label>
           <input
+            ref={passwordRef}
             type="password"
             id="password"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
