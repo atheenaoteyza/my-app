@@ -1,5 +1,13 @@
-import { Link } from "react-router-dom";
-export const DropdownLoggedOut = ({ setDropdown }) => {
+import { useNavigate } from "react-router-dom";
+export const DropdownLoggedIn = ({ setDropdown }) => {
+  const navigate = useNavigate();
+  const Logout = (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("cbid");
+    navigate("/Login");
+    setDropdown(false);
+  };
   return (
     <>
       <div className="absolute right-0 z-10 top-10 mr-5">
@@ -12,31 +20,39 @@ export const DropdownLoggedOut = ({ setDropdown }) => {
             aria-labelledby="dropdownDefaultButton"
           >
             <li>
-              <Link
+              <button
                 onClick={() => setDropdown(false)}
-                to="/Products"
+                href="#"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
-                All Products
-              </Link>
+                Dashboard
+              </button>
             </li>
             <li>
-              <Link
+              <button
                 onClick={() => setDropdown(false)}
-                to="/Login"
+                href="#"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
-                Login
-              </Link>
+                Settings
+              </button>
             </li>
             <li>
-              <Link
+              <button
                 onClick={() => setDropdown(false)}
-                to="/Register"
+                href="#"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
-                Register
-              </Link>
+                Earnings
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={Logout}
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Sign out
+              </button>
             </li>
           </ul>
         </div>

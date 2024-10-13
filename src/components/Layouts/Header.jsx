@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSearch } from "../Sections/SearchContext";
 import { DropdownLoggedOut } from "../Elements/DropdownLoggedOut";
+import { DropdownLoggedIn } from "../Elements/DropdownLoggedIn";
 import { useCart } from "../../context";
 
 export const Header = () => {
@@ -11,6 +12,7 @@ export const Header = () => {
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) || false
   );
+  const token = sessionStorage.getItem("token");
 
   const [searchSection, setSearchSection] = useState(false);
   const { search, setSearch } = useSearch(); // Use the context
@@ -43,6 +45,23 @@ export const Header = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        Dropdown &&
+        !event.target.closest("#dropdown") &&
+        !event.target.closest("#dropdownDefaultButton")
+      ) {
+        setDropdown(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [Dropdown]);
 
   return (
     <header>
@@ -78,7 +97,15 @@ export const Header = () => {
               className="bi bi-person-circle cursor-pointer text-xl text-gray-700 dark:text-white mr-5"
               type="button"
             ></span>
-            {Dropdown && <DropdownLoggedOut></DropdownLoggedOut>}
+            {Dropdown && (
+              <div id="dropdown" className="absolute right-0 z-10">
+                {token ? (
+                  <DropdownLoggedIn setDropdown={setDropdown} />
+                ) : (
+                  <DropdownLoggedOut setDropdown={setDropdown} />
+                )}
+              </div>
+            )}
           </div>
         </div>
       </nav>
