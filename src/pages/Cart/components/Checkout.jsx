@@ -1,4 +1,31 @@
+import { useState, useEffect } from "react";
+
 export const Checkout = ({ setCheckout }) => {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    const cbid = sessionStorage.getItem("cbid");
+
+    const authentication = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    async function getUser() {
+      const response = await fetch(
+        `http://localhost:3000/600/users/${cbid}`,
+        authentication
+      );
+      const data = await response.json();
+      console.log(data);
+      setUser(data);
+    }
+    getUser();
+  }, []);
+
   return (
     <>
       <section>
@@ -50,7 +77,7 @@ export const Checkout = ({ setCheckout }) => {
                       name="name"
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white"
-                      value=""
+                      value={user.name}
                       disabled
                       required=""
                     />
@@ -67,7 +94,7 @@ export const Checkout = ({ setCheckout }) => {
                       name="email"
                       id="email"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white"
-                      value=""
+                      value={user.email}
                       disabled
                       required=""
                     />

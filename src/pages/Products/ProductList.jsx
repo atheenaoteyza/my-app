@@ -18,7 +18,15 @@ export const ProductList = () => {
   // Loading state
   const [loading, setLoading] = useState(true);
 
-  // Fetch products once on mount
+  // Memoized filtering logic
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      Object.keys(product).some((key) =>
+        product[key].toString().toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [products, search]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -32,16 +40,9 @@ export const ProductList = () => {
       }
     };
     fetchProducts();
-  }, [initialProductList]);
+  }, []);
 
-  // Memoized filtering logic
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) =>
-      Object.keys(product).some((key) =>
-        product[key].toString().toLowerCase().includes(search.toLowerCase())
-      )
-    );
-  }, [products, search]);
+  // Fetch products once on mount
 
   // Clear filters on location change
   useEffect(() => {
