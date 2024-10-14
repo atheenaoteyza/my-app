@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { useCart } from "../../../context";
+import { func } from "prop-types";
 
 export const Checkout = ({ setCheckout }) => {
   const [user, setUser] = useState({});
+  const { newArray } = useCart();
+  const token = sessionStorage.getItem("token");
+  const cbid = sessionStorage.getItem("cbid");
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    const cbid = sessionStorage.getItem("cbid");
-
     const authentication = {
       method: "GET",
       headers: {
@@ -20,11 +22,35 @@ export const Checkout = ({ setCheckout }) => {
         authentication
       );
       const data = await response.json();
-      console.log(data);
       setUser(data);
     }
     getUser();
   }, []);
+
+  async function handleOrder(event) {
+    event.preventDefault();
+    const orders = {
+      cartList: newArray,
+      user: {
+        token: token,
+        name: user.name,
+        email: user.email,
+        id: user.id,
+      },
+    };
+    const requestOptions = {
+      method: "POST",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify(orders),
+    };
+    const response = await fetch(
+      "http://localhost:3000/orders",
+      requestOptions
+    );
+
+    const data = await response.json();
+    console.log(data);
+  }
 
   return (
     <>
@@ -64,7 +90,7 @@ export const Checkout = ({ setCheckout }) => {
                 <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
                   <i className="bi bi-credit-card mr-2"></i>CARD PAYMENT
                 </h3>
-                <form className="space-y-6">
+                <form onSubmit={handleOrder} className="space-y-6">
                   <div>
                     <label
                       htmlFor="name"
@@ -77,7 +103,7 @@ export const Checkout = ({ setCheckout }) => {
                       name="name"
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white"
-                      value={user.name}
+                      value={user.name || "Undefined"}
                       disabled
                       required=""
                     />
@@ -94,7 +120,7 @@ export const Checkout = ({ setCheckout }) => {
                       name="email"
                       id="email"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white"
-                      value={user.email}
+                      value={user.email || "B1t$nap@example.com"}
                       disabled
                       required=""
                     />
