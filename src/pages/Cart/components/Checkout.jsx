@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useCart } from "../../../context";
-import { func } from "prop-types";
 
 export const Checkout = ({ setCheckout }) => {
   const [user, setUser] = useState({});
-  const { newArray } = useCart();
+  const { newArray, total } = useCart();
   const token = sessionStorage.getItem("token");
   const cbid = sessionStorage.getItem("cbid");
+  const navigate = useNavigate();
   useEffect(() => {
     const authentication = {
       method: "GET",
@@ -31,8 +32,9 @@ export const Checkout = ({ setCheckout }) => {
     event.preventDefault();
     const orders = {
       cartList: newArray,
+      amount_paid: total,
+      quantity: newArray.length,
       user: {
-        token: token,
         name: user.name,
         email: user.email,
         id: user.id,
@@ -40,16 +42,21 @@ export const Checkout = ({ setCheckout }) => {
     };
     const requestOptions = {
       method: "POST",
-      headers: { "content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(orders),
     };
     const response = await fetch(
-      "http://localhost:3000/orders",
+      "http://localhost:3000/660/orders",
       requestOptions
     );
 
     const data = await response.json();
-    console.log(data);
+    console.log(data.id);
+    const orderId = sessionStorage.setItem("orderId", data.id);
+    navigate("/Order");
   }
 
   return (
