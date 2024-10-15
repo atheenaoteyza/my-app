@@ -2,7 +2,7 @@ import { useContext, createContext, useReducer } from "react";
 import { CartReducer } from "../reducers/CartReducer";
 const initialCartContext = {
   cartArray: [],
-  price: 0,
+  total: 0,
 };
 
 const CartContext = createContext(initialCartContext);
@@ -24,6 +24,7 @@ export const CartProvider = ({ children }) => {
     });
   }
   const newArray = state.cartArray;
+
   const value = {
     state,
     dispatch,
@@ -31,6 +32,7 @@ export const CartProvider = ({ children }) => {
     addToCart,
     removeToCart,
     initialCartContext,
+    total: state.total,
   };
   return (
     <>
