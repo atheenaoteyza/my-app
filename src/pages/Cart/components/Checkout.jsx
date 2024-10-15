@@ -54,9 +54,8 @@ export const Checkout = ({ setCheckout }) => {
     );
 
     const data = await response.json();
-    console.log(data.id);
-    const orderId = sessionStorage.setItem("orderId", data.id);
-    navigate("/Order");
+    console.log(data);
+    navigate("/Order", { state: { data: data, status: true } });
   }
 
   return (
