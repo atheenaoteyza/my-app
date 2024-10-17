@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import { memo } from "react";
 import { useCart } from "../../context";
 
-export const ProductCard = memo(({ product }) => {
+const ProductCard = ({ product }) => {
   const { name, id, image_url, price } = product;
   const { addToCart, removeToCart, newArray } = useCart();
 
-  const inCart = newArray.some((item) => item.id === id);
+  const isInCart = (item) => item.id === id;
+  const inCart = newArray.some(isInCart);
 
   const handleCartToggle = () => {
     if (inCart) {
@@ -61,4 +62,5 @@ export const ProductCard = memo(({ product }) => {
       </div>
     </div>
   );
-});
+};
+export default memo(ProductCard);
